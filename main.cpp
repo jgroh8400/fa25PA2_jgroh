@@ -36,10 +36,10 @@ int main() {
 
     // Step 4: Generate binary codes using an STL stack
     string codes[26];
-    generateCodes(root, codes);
+    //generateCodes(root, codes);
 
     // Step 5: Encode the message and print output
-    encodeMessage("input.txt", codes);
+    //encodeMessage("input.txt", codes);
 
     return 0;
 }
@@ -106,7 +106,8 @@ int buildEncodingTree(int nextFree) {
         int parent1 = numb1 + numb2;
         tree.push(parent1, weightArr);
     }
-    return tree.; // placeholder
+    cout << tree.data[0] << endl;
+    return weightArr[0]; // placeholder
 }
 
 // Step 4: Use an STL stack to generate codes

@@ -99,11 +99,20 @@ int buildEncodingTree(int nextFree) {
     //    - Push new parent index back into the heap
     // 4. Return the index of the last remaining node (root)
     MinHeap tree;
-    tree.push(nextFree, weightArr);
+    for (int i = 0; i < nextFree; ++i) {
+        if (weightArr[i] > 0) {
+            tree.push(i, weightArr);
+            cout << i << endl;
+        }
+    }
     while (tree.size > 1) {
+        cout << "test" << endl;
         int numb1 = tree.pop(weightArr);
+        cout << numb1 << "\n";
         int numb2 = tree.pop(weightArr);
+        cout << numb2 << "\n";
         int parent1 = numb1 + numb2;
+        cout << parent1 << "\n";
         tree.push(parent1, weightArr);
     }
     cout << tree.data[0] << endl;

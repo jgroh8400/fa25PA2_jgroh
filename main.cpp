@@ -104,10 +104,10 @@ int buildEncodingTree(int nextFree) {
             tree.push(i, weightArr);
         }
     }
-    tree.display();
     for (int i = 0; i < nextFree; ++i) {
         cout << weightArr[i] << " " << charArr[i] << endl;
     }
+    tree.display();
     while (tree.size > 1) {
         int numb1 = tree.pop(weightArr);
         leftArr[nextFree] = numb1;

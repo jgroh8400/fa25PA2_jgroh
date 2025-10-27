@@ -15,7 +15,6 @@ struct MinHeap {
     MinHeap() { size = 0; }
 
     void push(int idx, int weightArr[]) {
-        // TODO: insert index at end of heap, restore order using upheap()
         data[size] = idx;
         size++;
         cout << size << endl;
@@ -25,7 +24,7 @@ struct MinHeap {
     int pop(int weightArr[]) {
         // TODO: remove and return smallest index
         // Replace root with last element, then call downheap()
-        int smallest = data[0];
+        int smallest = weightArr[data[0]];
         data[0] = data[size - 1];
         downheap(0, weightArr);
         size--;
@@ -33,28 +32,37 @@ struct MinHeap {
     }
 
     void upheap(int pos, int weightArr[]) {
-        // TODO: swap child upward while smaller than parent
-        cout << "test" << endl;
         while (pos > 0 && weightArr[data[(pos - 1) / 2]] > weightArr[data[pos]]) {
             swap(data[(pos - 1) / 2], data[pos]);
-            pos = (pos - 1) / 2;
-            cout << "swap" << endl;
+            pos = (pos - 1) / 2; // log n time complexity
         }
     }
 
     void downheap(int pos, int weightArr[]) {
         // TODO: swap parent downward while larger than any child
-        while (weightArr[data[pos]] > weightArr[data[2 * pos + 1]] || weightArr[data[pos]] > weightArr[data[2 * pos + 2]]) {
-            swap(data[pos], data[pos - 1 / 2]);
-            pos = pos - 1 / 2;
+        while (pos ) {
+            int left = data[2 * (pos + 1)];
+            int right = data[2 * (pos + 2)];
+            int smallest;
+            if (weightArr[left] < weightArr[right]) {
+                smallest = left;
+            } else {
+                smallest = right;
+            }
+            if (weightArr[smallest] < weightArr[pos]) {
+                swap (data[pos], data[smallest]);
+                cout << "test" << endl;
+            }
+
         }
+
     }
 
     void display() {
         for (int i = 0; i < size; i++) {
             cout << data[i] << " ";
         }
-        cout << endl;
+        cout << "displayed" << endl;
     }
 };
 

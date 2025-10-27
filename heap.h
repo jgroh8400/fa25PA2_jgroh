@@ -17,7 +17,6 @@ struct MinHeap {
     void push(int idx, int weightArr[]) {
         data[size] = idx;
         size++;
-        cout << size << endl;
         upheap(size - 1, weightArr);
     }
 

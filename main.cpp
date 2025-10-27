@@ -102,18 +102,22 @@ int buildEncodingTree(int nextFree) {
     for (int i = 0; i < nextFree; ++i) {
         if (weightArr[i] > 0) {
             tree.push(i, weightArr);
-            cout << i << endl;
         }
     }
+    tree.display();
+    for (int i = 0; i < nextFree; ++i) {
+        cout << weightArr[i] << " " << charArr[i] << endl;
+    }
     while (tree.size > 1) {
-        cout << "test" << endl;
         int numb1 = tree.pop(weightArr);
-        cout << numb1 << "\n";
+        leftArr[nextFree] = numb1;
         int numb2 = tree.pop(weightArr);
-        cout << numb2 << "\n";
+        rightArr[nextFree] = numb2;
         int parent1 = numb1 + numb2;
-        cout << parent1 << "\n";
+        weightArr[nextFree] = parent1;
         tree.push(parent1, weightArr);
+        tree.display();
+        nextFree++;
     }
     cout << tree.data[0] << endl;
     return weightArr[0]; // placeholder

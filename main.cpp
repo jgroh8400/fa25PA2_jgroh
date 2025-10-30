@@ -33,6 +33,7 @@ int main() {
 
     // Step 3: Build encoding tree using your heap
     int root = buildEncodingTree(nextFree);
+    cout << "root " << root << endl;
 
     // Step 4: Generate binary codes using an STL stack
     string codes[26];
@@ -113,17 +114,23 @@ int buildEncodingTree(int nextFree) {
     int parent;
     while (tree.size > 1) {
         numb1 = tree.pop(weightArr);
-        leftArr[nextFree] = numb1;
         numb2 = tree.pop(weightArr);
+        cout << numb1 << " " << numb2 << endl;
+
+        leftArr[nextFree] = numb1; // left and right pointer assigned
         rightArr[nextFree] = numb2;
+
         parent = numb1 + numb2;
         weightArr[nextFree] = parent;
-        tree.push(parent, weightArr);
+        tree.push(nextFree, weightArr); // fixed this initially pushing the weight of parent and not the index into the minheap
         tree.display();
         nextFree++;
     }
-    cout << tree.data[0] << endl;
-    return weightArr[0]; // placeholder
+    for (int i = 0; i < nextFree; ++i) {
+        cout << leftArr[i] << " l r " << rightArr[i] << endl;
+    }
+
+    return tree.data[0]; // placeholder
 }
 
 // Step 4: Use an STL stack to generate codes
@@ -134,9 +141,25 @@ void generateCodes(int root, string codes[]) {
     // Record code when a leaf node is reached.
     stack<pair<int, string>> nodes;
     nodes.push(make_pair(root, ""));
-    for (int i = 0; i < 26; ++i) {
+    while (!nodes.empty()) {
+        pair<int, string> node = nodes.top();
+        string code = node.second;
+        nodes.pop();
 
+        // leaf
+        if (leftArr[node.first] == -1 && rightArr[node.first] == -1) {
+            codes[node.first] = code;
+        }
+        // left check for child
+        if (leftArr[node.first] != -1) {
+            nodes.push(make_pair(leftArr[node.first], code + "0"));
+        }
+        // right check for child
+        if (rightArr[node.first] != -1) {
+            nodes.push(make_pair(rightArr[node.first], code + "1"));
+        }
     }
+
 
 }
 

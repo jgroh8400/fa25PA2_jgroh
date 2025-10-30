@@ -129,6 +129,9 @@ int buildEncodingTree(int nextFree) {
     for (int i = 0; i < nextFree; ++i) {
         cout << leftArr[i] << " l r " << rightArr[i] << endl;
     }
+    for (int i = 0; i < nextFree; ++i) {
+        cout << weightArr[i] << endl;
+    }
 
     return tree.data[0]; // placeholder
 }

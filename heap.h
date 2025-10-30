@@ -25,8 +25,8 @@ struct MinHeap {
         // Replace root with last element, then call downheap()
         int smallest = data[0];
         data[0] = data[size - 1];
-        downheap(0, weightArr);
         size--;
+        downheap(0, weightArr);
         return smallest;
     }
 

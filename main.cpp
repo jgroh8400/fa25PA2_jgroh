@@ -103,6 +103,7 @@ int buildEncodingTree(int nextFree) {
     for (int i = 0; i < nextFree; ++i) {
         if (weightArr[i] > 0) {
             tree.push(i, weightArr);
+            tree.display();
         }
     }
     tree.display();
@@ -116,7 +117,7 @@ int buildEncodingTree(int nextFree) {
         leftArr[nextFree] = numb1; // left and right pointer assigned
         rightArr[nextFree] = numb2;
 
-        parent = numb1 + numb2;
+        parent = weightArr[numb1] + weightArr[numb2];
         weightArr[nextFree] = parent;
         tree.push(nextFree, weightArr); // fixed this initially pushing the weight of parent and not the index into the minheap
         tree.display();

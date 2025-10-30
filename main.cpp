@@ -37,10 +37,10 @@ int main() {
 
     // Step 4: Generate binary codes using an STL stack
     string codes[26];
-    //generateCodes(root, codes);
+    generateCodes(root, codes);
 
     // Step 5: Encode the message and print output
-    //encodeMessage("input.txt", codes);
+    encodeMessage("input.txt", codes);
 
     return 0;
 }
@@ -105,9 +105,6 @@ int buildEncodingTree(int nextFree) {
             tree.push(i, weightArr);
         }
     }
-    for (int i = 0; i < nextFree; ++i) {
-        cout << weightArr[i] << " " << charArr[i] << endl;
-    }
     tree.display();
     int numb1;
     int numb2;
@@ -115,7 +112,6 @@ int buildEncodingTree(int nextFree) {
     while (tree.size > 1) {
         numb1 = tree.pop(weightArr);
         numb2 = tree.pop(weightArr);
-        cout << numb1 << " " << numb2 << endl;
 
         leftArr[nextFree] = numb1; // left and right pointer assigned
         rightArr[nextFree] = numb2;
@@ -129,11 +125,9 @@ int buildEncodingTree(int nextFree) {
     for (int i = 0; i < nextFree; ++i) {
         cout << leftArr[i] << " l r " << rightArr[i] << endl;
     }
-    for (int i = 0; i < nextFree; ++i) {
-        cout << weightArr[i] << endl;
-    }
 
     return tree.data[0]; // placeholder
+
 }
 
 // Step 4: Use an STL stack to generate codes
@@ -142,25 +136,28 @@ void generateCodes(int root, string codes[]) {
     // Use stack<pair<int, string>> to simulate DFS traversal.
     // Left edge adds '0', right edge adds '1'.
     // Record code when a leaf node is reached.
-    stack<pair<int, string>> nodes;
-    nodes.push(make_pair(root, ""));
-    while (!nodes.empty()) {
-        pair<int, string> node = nodes.top();
-        string code = node.second;
-        nodes.pop();
+    stack<pair<int, string>> treeStack;
+    treeStack.push(make_pair(root, ""));
+    pair<int, string> curr;
+    while (!treeStack.empty()) {
+        curr = treeStack.top();
+        string code = curr.second;
+        treeStack.pop();
 
         // leaf
-        if (leftArr[node.first] == -1 && rightArr[node.first] == -1) {
-            codes[node.first] = code;
+        if (leftArr[curr.first] == -1 && rightArr[curr.first] == -1) {
+            codes[curr.first] = code;
         }
         // left check for child
-        if (leftArr[node.first] != -1) {
-            nodes.push(make_pair(leftArr[node.first], code + "0"));
+        if (leftArr[curr.first] != -1) {
+            treeStack.push(make_pair(leftArr[curr.first], code + "0"));
         }
         // right check for child
-        if (rightArr[node.first] != -1) {
-            nodes.push(make_pair(rightArr[node.first], code + "1"));
+        if (rightArr[curr.first] != -1) {
+            treeStack.push(make_pair(rightArr[curr.first], code + "1"));
         }
+
+
     }
 
 

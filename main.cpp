@@ -101,6 +101,10 @@ int buildEncodingTree(int nextFree) {
     // 4. Return the index of the last remaining node (root)
     MinHeap tree;
     for (int i = 0; i < nextFree; ++i) {
+        cout << weightArr[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < nextFree; ++i) {
         if (weightArr[i] > 0) {
             tree.push(i, weightArr);
             tree.display();

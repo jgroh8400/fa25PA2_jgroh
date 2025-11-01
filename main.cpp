@@ -88,17 +88,10 @@ int createLeafNodes(int freq[]) {
     return nextFree;
 }
 
-// Step 3: Build the encoding tree using heap operations
+// BuildEncodingTree - creates a minheap, pushes all indices of weightArr into it, and then runs through while loop
+// to find left and child pointers, root node value, and parent weight. returns root.
 int buildEncodingTree(int nextFree) {
-    // TODO:
-    // 1. Create a MinHeap object.
-    // 2. Push all leaf node indices into the heap.
-    // 3. While the heap size is greater than 1:
-    //    - Pop two smallest nodes
-    //    - Create a new parent node with combined weight
-    //    - Set left/right pointers
-    //    - Push new parent index back into the heap
-    // 4. Return the index of the last remaining node (root)
+
     MinHeap tree;
     for (int i = 0; i < nextFree; ++i) {
         cout << weightArr[i] << " ";
@@ -128,19 +121,21 @@ int buildEncodingTree(int nextFree) {
         nextFree++;
     }
     for (int i = 0; i < nextFree; ++i) {
+        cout << weightArr[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < nextFree; ++i) {
         cout << leftArr[i] << " l r " << rightArr[i] << endl;
     }
 
-    return tree.data[0]; // placeholder
+    return tree.data[0];
 
 }
 
-// Step 4: Use an STL stack to generate codes
+
+// generateCodes - We use a stack pair to traverse the tree we made before. With our now full left and right arrays, we can
+// check for children and add 0 (left) or 1 (right) to our code
 void generateCodes(int root, string codes[]) {
-    // TODO:
-    // Use stack<pair<int, string>> to simulate DFS traversal.
-    // Left edge adds '0', right edge adds '1'.
-    // Record code when a leaf node is reached.
 
     stack<pair<int, string>> treeStack;
     treeStack.push(make_pair(root, ""));

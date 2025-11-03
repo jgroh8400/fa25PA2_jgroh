@@ -31,7 +31,6 @@ struct MinHeap {
         data[0] = data[size - 1];
         size--;
         downheap(0, weightArr);
-        cout << "Pop: " << smallest << endl;
         return smallest;
     }
 
@@ -65,6 +64,7 @@ struct MinHeap {
 
     }
 
+    // display - used for debugging
     void display() {
         for (int i = 0; i < size; i++) {
             cout << data[i] << " ";

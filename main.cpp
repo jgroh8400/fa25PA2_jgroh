@@ -93,17 +93,13 @@ int createLeafNodes(int freq[]) {
 int buildEncodingTree(int nextFree) {
 
     MinHeap tree;
-    for (int i = 0; i < nextFree; ++i) {
-        cout << weightArr[i] << " ";
-    }
-    cout << endl;
+
     for (int i = 0; i < nextFree; ++i) {
         if (weightArr[i] > 0) {
             tree.push(i, weightArr);
-            tree.display();
         }
     }
-    tree.display();
+
     int numb1;
     int numb2;
     int parent;
@@ -117,18 +113,10 @@ int buildEncodingTree(int nextFree) {
         parent = weightArr[numb1] + weightArr[numb2];
         weightArr[nextFree] = parent;
         tree.push(nextFree, weightArr); // fixed this initially pushing the weight of parent and not the index into the minheap
-        tree.display();
         nextFree++;
     }
-    for (int i = 0; i < nextFree; ++i) {
-        cout << weightArr[i] << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < nextFree; ++i) {
-        cout << leftArr[i] << " l r " << rightArr[i] << endl;
-    }
 
-    return tree.data[0];
+    return tree.data[0]; // return root
 
 }
 

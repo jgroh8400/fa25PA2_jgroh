@@ -1,5 +1,5 @@
 //
-// Created by Manju Muralidharan on 10/19/25.
+// Name: Joshua Groh RedID: 132247515 Date: 11/3/25 Programming Assignment 2
 //
 #include <iostream>
 #include <fstream>
@@ -94,6 +94,7 @@ int buildEncodingTree(int nextFree) {
 
     MinHeap tree;
 
+    // push indices into tree
     for (int i = 0; i < nextFree; ++i) {
         if (weightArr[i] > 0) {
             tree.push(i, weightArr);
@@ -103,6 +104,7 @@ int buildEncodingTree(int nextFree) {
     int numb1;
     int numb2;
     int parent;
+
     while (tree.size > 1) {
         numb1 = tree.pop(weightArr);
         numb2 = tree.pop(weightArr);

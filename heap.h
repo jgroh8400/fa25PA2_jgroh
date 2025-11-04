@@ -1,5 +1,5 @@
 //
-// Created by Manju Muralidharan on 10/19/25.
+// Name: Joshua Groh RedID: 132247515 Date: 11/3/25 Programming Assignment 2
 //
 
 #ifndef HEAP_H
@@ -61,16 +61,8 @@ struct MinHeap {
             pos = smallest;
 
         }
-
     }
 
-    // display - used for debugging
-    void display() {
-        for (int i = 0; i < size; i++) {
-            cout << data[i] << " ";
-        }
-        cout << "displayed" << endl;
-    }
 };
 
 #endif
